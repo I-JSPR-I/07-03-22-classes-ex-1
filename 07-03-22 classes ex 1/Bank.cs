@@ -13,7 +13,7 @@ namespace _07_03_22_classes_ex_1
         public Bank()
         {
             Stand = 0;
-            Limit = 1000;
+            Limit = -1000;
             Verichtingen = 0;
         }
         public Bank(int GestortGeld)
@@ -21,4 +21,4 @@ namespace _07_03_22_classes_ex_1
             Stand = Stand + GestortGeld;
         }
     }
-    }
+}

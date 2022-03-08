@@ -6,50 +6,73 @@ namespace _07_03_22_classes_ex_1
     {
         static void Main(string[] args)
         {
+            int Antwoord;
             Bank bankrekening = new Bank();
             do
             {
-                int Antwoord = Menu();
+                Antwoord = Menu();
                 if (Antwoord == 1)
                 {
-                    GeldStorten(Antwoord);
+                    GeldStorten(Antwoord, bankrekening);
                 }
                 if (Antwoord == 2)
                 {
-                    GeldAfhalen(Antwoord);
+                    GeldAfhalen(Antwoord, bankrekening);
                 }
                 if (Antwoord == 3)
                 {
-                    StatusBekijken(Antwoord);
+                    StatusBekijken(Antwoord, bankrekening);
+                }
+                if (Antwoord == 4)
+                {
+                    VerichtingenBekijken(Antwoord, bankrekening);
                 }
 
-            } while (Convert.ToInt32(Console.ReadLine()) != 0);
+            } while (Antwoord != 0);
         }
 
-        private static void StatusBekijken(int Antwoord)
+        private static void VerichtingenBekijken(int Antwoord, Bank bankrekening)
         {
+            Console.WriteLine($"U heeft {bankrekening.Verichtingen} verichtingen gedaan");
+            Console.ReadLine();
         }
 
-        private static void GeldAfhalen(int Antwoord)
+        private static void StatusBekijken(int Antwoord, Bank bankrekening)
         {
-
+            Console.WriteLine($"Uw rekening bedraagt {bankrekening.Stand} euro");
+            Console.ReadLine();
         }
 
-        private static int GeldStorten(int Antwoord)
+        private static void GeldAfhalen(int Antwoord, Bank bankrekening)
+        {
+            Console.Clear();
+            Console.WriteLine("Hoeveel geld wilt u afhalen?");
+            int GenomenGeld = Convert.ToInt32(Console.ReadLine());
+            bankrekening.Verichtingen++;
+            if (bankrekening.Stand - GenomenGeld > bankrekening.Limit)
+            {
+                bankrekening.Stand = bankrekening.Stand - GenomenGeld;
+            }
+            Console.WriteLine($"U kunt niet onder {bankrekening.Limit} euro gaan");
+        }
+
+        private static void GeldStorten(int Antwoord, Bank bankrekening)
         {
             Console.Clear();
             Console.WriteLine("Hoeveel geld wilt u storten?");
             int gestortgeld = Convert.ToInt32(Console.ReadLine());
-
-            return gestortgeld;
+            bankrekening.Stand = bankrekening.Stand + gestortgeld;
+            bankrekening.Verichtingen++;
         }
 
         private static int Menu()
         {
+            Console.Clear();
             Console.WriteLine("Wat wilt u doen?");
             Console.WriteLine("(1) Geld storten");
             Console.WriteLine("(2) Geld Afhalen");
             Console.WriteLine("(3) Rekening bekijken");
+            Console.WriteLine("(4) Verichtingen bekijken");
             Console.WriteLine("(0) Menu sluiten");
 
 
