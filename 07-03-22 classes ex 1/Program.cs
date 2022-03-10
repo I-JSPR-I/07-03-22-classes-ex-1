@@ -34,12 +34,14 @@ namespace _07_03_22_classes_ex_1
         private static void VerichtingenBekijken(int Antwoord, Bank bankrekening)
         {
             Console.WriteLine($"U heeft {bankrekening.Verichtingen} verichtingen gedaan");
+            Console.WriteLine($"Druk op enter om verder te gaan.");
             Console.ReadLine();
         }
 
         private static void StatusBekijken(int Antwoord, Bank bankrekening)
         {
             Console.WriteLine($"Uw rekening bedraagt {bankrekening.Stand} euro");
+            Console.WriteLine($"Druk op enter om verder te gaan.");
             Console.ReadLine();
         }
 
@@ -49,11 +51,14 @@ namespace _07_03_22_classes_ex_1
             Console.WriteLine("Hoeveel geld wilt u afhalen?");
             int GenomenGeld = Convert.ToInt32(Console.ReadLine());
             bankrekening.Verichtingen++;
-            if (bankrekening.Stand - GenomenGeld > bankrekening.Limit)
+            if ((bankrekening.Stand - GenomenGeld) < bankrekening.Limit)
             {
-                bankrekening.Stand = bankrekening.Stand - GenomenGeld;
+                Console.WriteLine($"U kunt niet onder {bankrekening.Limit} euro gaan");
+                Console.WriteLine($"Druk op enter om verder te gaan.");
+                Console.ReadLine();
             }
-            Console.WriteLine($"U kunt niet onder {bankrekening.Limit} euro gaan");
+
+            bankrekening.Stand = bankrekening.Stand - GenomenGeld;
         }
 
         private static void GeldStorten(int Antwoord, Bank bankrekening)
