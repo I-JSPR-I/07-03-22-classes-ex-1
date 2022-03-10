@@ -57,8 +57,11 @@ namespace _07_03_22_classes_ex_1
                 Console.WriteLine($"Druk op enter om verder te gaan.");
                 Console.ReadLine();
             }
+            else
+            {
+                bankrekening.Stand = bankrekening.Stand - GenomenGeld;
+            }
 
-            bankrekening.Stand = bankrekening.Stand - GenomenGeld;
         }
 
         private static void GeldStorten(int Antwoord, Bank bankrekening)
